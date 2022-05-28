@@ -26,9 +26,6 @@ public class User implements UserDetails {
     @Column(name="lastName")
     private String lastName;
 
-    @Column(name="age")
-    private int age;
-
     @Column(name="username")
     private String username;
 
@@ -38,7 +35,8 @@ public class User implements UserDetails {
     @Column(name="enabled")
     private boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //cascadeT = all
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -58,7 +56,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getUsername();
+        return username;
     }
 
     @Override
