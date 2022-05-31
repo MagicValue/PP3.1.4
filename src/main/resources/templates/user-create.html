@@ -5,12 +5,44 @@
     <title>Create user</title>
 </head>
 <body>
-<form action="#" th:action="@{/user-create}" th:object="${user}" method="post">
-    <label for="firstName">First name</label>
-    <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name">
+<form th:action="@{/admin/user-create/new}" th:object="${user}" method="POST">
+    <label for="name">First name</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Name">
     <label for="lastName">Last name</label>
     <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name">
+    <label for="username">Username</label>
+    <input type="text" th:field="*{username}" id="username" placeholder="Username">
+    <label for="password">Password</label>
+    <input type="password" th:field="*{password}" id="password" placeholder="Password">
+    <label for="enabled">Enabled</label>
+    <input type="number" th:field="*{enabled}" id="enabled" placeholder="Enabled">
+    <br>
+    <label>
+        <select size="3" multiple="multiple" name="rolesId" id="roles">
+            <option disabled>Roles:</option>
+            <option value="ROLE_ADMIN">ADMIN</option>
+            <option selected value="ROLE_USER">USER</option>
+        </select>
+    </label>
+<!--    <label>Roles:</label>-->
+<!--    <label>-->
+<!--        <select size="3" multiple="multiple" name="name" id="role_id">-->
+<!--            <option disabled>Roles:</option>-->
+<!--            <option value="ROLE_ADMIN">ADMIN</option>-->
+<!--            <option selected value="ROLE_USER">USER</option>-->
+<!--        </select>-->
+<!--    </label>-->
+<!--    <label>Check role:-->
+<!--        <input type="checkbox" name="checked"-->
+<!--               th:each="role : ${roles}"-->
+<!--               th:text="${role.getName()}"-->
+<!--               th:value="${role.getId()}"-->
+<!--               th:selected="${user.getAuthorities().contains(role)}">-->
+<!--    </label>-->
     <input type="submit" value="Create User">
+</form>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout" />
 </form>
 </body>
 </html>

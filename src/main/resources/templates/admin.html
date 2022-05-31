@@ -7,6 +7,10 @@
 <body>
 <h1>ADMIN, page!</h1>
 
+<form th:action="@{/user-list}" method="post">
+    <input type="submit" value="Show all users" />
+</form>
+
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout" />
 </form>

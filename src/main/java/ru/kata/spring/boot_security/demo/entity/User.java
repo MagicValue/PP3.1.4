@@ -21,7 +21,7 @@ public class User implements UserDetails {
     @Column(name="name")
     private String name;
 
-    @Column(name="lastName")
+    @Column(name="last_name")
     private String lastName;
 
     @Column(name="username")
@@ -42,6 +42,9 @@ public class User implements UserDetails {
     )
     private Set<Role> roles;
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
