@@ -54,7 +54,7 @@ public class AdminController {
 
     @DeleteMapping("user-list/{id}/delete")
     public String deleteUserById(@PathVariable("id") Long id) {
-        userService.delete(userService.findById(id));
+        userService.deleteById(id);
         return "redirect:/admin/user-list";
     }
 
@@ -65,7 +65,7 @@ public class AdminController {
         return "user-update";
     }
 
-    @PatchMapping("/{id}")
+    @PostMapping("/{id}")
     public String updateUser(@ModelAttribute("user") User user,
                              @RequestParam(value = "rolesId") String[] roles) {
         user.setRoles(roleService.getSetRoles(roles)); //set roles (str[] r)

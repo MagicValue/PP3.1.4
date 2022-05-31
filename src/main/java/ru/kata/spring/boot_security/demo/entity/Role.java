@@ -12,7 +12,7 @@ import java.util.List;
 public class Role implements GrantedAuthority {
 
     @Id
-    @Column(name = "role_id")
+    @Column(name = "role_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
