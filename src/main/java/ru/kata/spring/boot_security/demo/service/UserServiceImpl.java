@@ -12,8 +12,6 @@ import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
@@ -31,7 +29,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public User getUserByUsername(String username){
+    public User getUserByUsername(String username) {
         return userRepository.getUser(username);
     }
 
@@ -53,28 +51,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findById(Long id){
+    public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
+
     @Override
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userRepository.findAll();
     }
+
     @Override
-    public void saveUser(User user){
+    public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
+
     @Override
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
-    @Override
-    public void delete(User user) {
-        userRepository.delete(user);
-    }
-//    @Override
-//    public void deleteWithEnt(Long id) {
-//        entityManager.remove(entityManager.find(User.class, id));
-//    }
 }

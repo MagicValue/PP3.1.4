@@ -63,25 +63,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-
-
-    // аутентификация inMemory
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.builder()
-//                        .username("user")
-//                        .password("{bcrypt}$2a$12$j42YV/II18fc9GJz347eE.V16WmseemWgN/WHMWVQqSiXM8Vve4au")
-//                        .roles("USER")
-//                        .build();
-//        UserDetails admin =
-//                User.builder()
-//                        .username("admin")
-//                        .password("{bcrypt}$2a$12$vTorJrXk37VkYcPocq1iouKpGpaWV7LNMI.OhJFt5x.RYAJCV3f0O")
-//                        .roles("ADMIN", "USER")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 
 
 @Service
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
 
     private RoleRepository roleRepository;
 
@@ -24,27 +24,6 @@ public class RoleServiceImpl implements RoleService{
     @Override
     public List<Role> getAllRoles() {
         return roleRepository.findAll();
-    }
-
-    @Override
-    public Role getRoleByName(String name) {
-        return roleRepository.getRoleByName(name);
-    }
-
-
-    @Override
-    public void saveRole(Role role) {
-        roleRepository.save(role);
-    }
-
-    @Override
-    public Role getRoleById(Long id) {
-        return roleRepository.getById(id);
-    }
-
-    @Override
-    public void deleteRoleById(Long id) {
-        roleRepository.deleteById(id);
     }
 
     @Override

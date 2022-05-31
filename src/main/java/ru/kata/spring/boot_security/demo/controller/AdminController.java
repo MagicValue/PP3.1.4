@@ -48,6 +48,7 @@ public class AdminController {
         userService.saveUser(user);
         return "redirect:/admin/user-list";
     }
+
     @GetMapping(value = "/user-list/{id}/user-update")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("roles", roleService.getAllRoles());
@@ -62,9 +63,9 @@ public class AdminController {
         userService.saveUser(user);
         return "redirect:/admin/user-list";
     }
+
     @DeleteMapping("user-list/{id}/delete")
     public String deleteUserById(@PathVariable("id") Long id) {
-//        userService.deleteWithEnt(id);
         userService.deleteById(id);
         return "redirect:/admin/user-list";
     }
