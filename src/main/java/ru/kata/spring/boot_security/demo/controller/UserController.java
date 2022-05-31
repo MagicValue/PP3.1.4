@@ -15,6 +15,7 @@ import java.security.Principal;
 public class UserController {
 
     private UserServiceImpl userService;
+
     @Autowired
     public void setUserService(UserServiceImpl userService) {
         this.userService = userService;
@@ -23,9 +24,8 @@ public class UserController {
 
     @GetMapping("/user")
     public String getUserById(Principal principal, Model model) {
-        User user =userService.getUserByUsername(principal.getName());
+        User user = userService.getUserByUsername(principal.getName());
         model.addAttribute("user", user);
-//        model.addAttribute("user", user.getLastName());
         return "user";
     }
 
