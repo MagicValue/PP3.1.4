@@ -10,7 +10,10 @@ import ru.kata.spring.boot_security.demo.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.id = :id")
-    User getUserById(@Param("id") long id);
+    User getUserById(@Param("id") Long id);
+    @Query("SELECT u FROM User u WHERE u.id = :id")
+    User deleteUserAndUR(@Param("id") Long id);
+
 
     @Query("SELECT u FROM User u WHERE u.username = :username")
     User getUser(@Param("username") String username);

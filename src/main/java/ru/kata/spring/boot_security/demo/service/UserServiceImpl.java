@@ -12,6 +12,8 @@ import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
@@ -71,4 +73,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void delete(User user) {
         userRepository.delete(user);
     }
+//    @Override
+//    public void deleteWithEnt(Long id) {
+//        entityManager.remove(entityManager.find(User.class, id));
+//    }
 }
