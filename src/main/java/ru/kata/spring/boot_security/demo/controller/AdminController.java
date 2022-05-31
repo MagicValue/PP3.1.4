@@ -51,25 +51,23 @@ public class AdminController {
         userService.saveUser(user);
         return "redirect:/admin/user-list";
     }
-
-    @DeleteMapping("user-list/{id}/delete")
-    public String deleteUserById(@PathVariable("id") Long id) {
-        userService.deleteById(id);
-        return "redirect:/admin/user-list";
-    }
-
-    @GetMapping("/user-list/{id}/user-update")
+    @GetMapping(value = "/user-list/{id}/user-update")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("roles", roleService.getAllRoles());
         model.addAttribute("user", userService.findById(id));
         return "user-update";
     }
 
-    @PostMapping("/{id}")
+    @PostMapping(value = "/user-list/{id}/user-update")
     public String updateUser(@ModelAttribute("user") User user,
                              @RequestParam(value = "rolesId") String[] roles) {
         user.setRoles(roleService.getSetRoles(roles)); //set roles (str[] r)
         userService.saveUser(user);
+        return "redirect:/admin/user-list";
+    }
+    @DeleteMapping("user-list/{id}/delete")
+    public String deleteUserById(@PathVariable("id") Long id) {
+        userService.deleteById(id);
         return "redirect:/admin/user-list";
     }
 }
