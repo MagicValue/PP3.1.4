@@ -14,6 +14,7 @@
         <th>Name</th>
         <th>LastName</th>
         <th>Username</th>
+        <th>Role</th>
     </tr>
 
     </thead>
@@ -23,6 +24,8 @@
         <td th:utext="${user.getName()}">Name</td>
         <td th:utext="${user.getLastName()}">Last Name</td>
         <td th:utext="${user.getUsername()}">Username</td>
+        <td th:each="rol : ${user.getRoles()}"
+           th:text="${rol.getName()}+' '">Role</td>
     </tr>
     </tbody>
 </table>

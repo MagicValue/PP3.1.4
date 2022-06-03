@@ -18,6 +18,7 @@
                 <th>Username</th>
                 <th>Password</th>
                 <th>Enabled</th>
+                <th>Role</th>
             </tr>
             </thead>
             <tbody>
@@ -28,6 +29,8 @@
                 <td th:text="${user.username}"></td>
                 <td th:text="${user.password}"></td>
                 <td th:text="${user.enabled}"></td>
+                <td th:each="rol : ${user.getRoles()}"
+                    th:text="${rol.getName()}+' '">Role</td>
                 <td>
                     <form th:action= "@{/admin/user-list/{id}/user-update(id=${user.id})}" th:object="${user}">
                         <button type="submit">Update</button>
