@@ -3,39 +3,24 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <!-- Скрипты -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-            crossorigin="anonymous"></script>
 
     <title>Spring Security Example</title>
 </head>
 <body>
 
-
-<!-- Верхний бар -->
+<!-- Up bar -->
 
 <nav class="navbar navbar-dark bg-dark">
-    <!-- Для отображения имейла и роли залогинившегося -->
     <span class="navbar-brand mb-0 h1">
-
          <strong><a th:text="${user.getUsername()}"></a></strong>
         <span class="text-start">with role:
             <a th:each="rol : ${user.getRoles()}" th:text="${rol.getName()}+' '"></a>
         </span>
     </span>
-    <!--    кнопка логаут-->
     <ul class="navbar-nav px-4">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="/logout">Logout</a>
@@ -43,13 +28,12 @@
     </ul>
 </nav>
 
-<!-- Левый бар -->
+<!-- Left bar -->
 
 <div class="row mt-5">
     <div class="col-2 fixed-left">
         <div th:fragment="leftMenu">
             <ul class="nav flex-sm-column">
-<!--                проверить нужна ли проверка на админа-->
                 <li class="nav-item">
                     <a class="nav-link"
                        th:classappend="${#httpServletRequest.getRequestURI().equals('/admin/') ? 'active bg-primary text-white' : ''}"
@@ -67,8 +51,7 @@
     <div class="col-10 bg-light">
         <h1>Admin Panel</h1>
 
-
-        <!-- Переключение над таблицей между User table и New user -->
+        <!-- swap to new user -->
 
         <nav>
             <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
@@ -80,8 +63,7 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
 
-
-            <!----------------------------------- All users ------------------------------------->
+            <!-- userList -->
 
             <div id="nav-home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-home-tab">
                 <p><strong>All users:</strong></p>
@@ -99,26 +81,22 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="msg : ${userList}">
-                            <td th:text="${msg.getId()}">ID</td>
-                            <td th:text="${msg.getName()}">Name</td>
-                            <td th:text="${msg.getLastName()}">LastName</td>
-                            <td th:text="${msg.getUsername()}">Username</td>
+                        <tr th:each="user : ${userList}">
+                            <td th:text="${user.getId()}">ID</td>
+                            <td th:text="${user.getName()}">Name</td>
+                            <td th:text="${user.getLastName()}">LastName</td>
+                            <td th:text="${user.getUsername()}">Username</td>
                             <td>
-                                <li th:each="rol : ${msg.getRoles()}"
-                                th:text="${rol.getName()}"></li>
+                                <li th:each="rol : ${user.getRoles()}"
+                                    th:text="${rol.getName()}"></li>
                             </td>
-
-
-                            <!-- Красная нопка Delete и синяя кнопка Edit -->
-
                             <td>
-                                <button th:href="${'#edit' + msg.getId()}" type="button" class="btn btn-info"
+                                <button th:href="${'#edit' + user.getId()}" type="button" class="btn btn-info"
                                         data-toggle="modal">Update
                                 </button>
                             </td>
                             <td>
-                                <button th:href="${'#delete' + msg.getId()}" type="button" class="btn btn-danger"
+                                <button th:href="${'#delete' + user.getId()}" type="button" class="btn btn-danger"
                                         data-toggle="modal">Delete
                                 </button>
                             </td>
@@ -127,7 +105,6 @@
                     </table>
                 </div>
             </div>
-
 
             <!-- New user -->
 
@@ -205,9 +182,7 @@
     </div>
 </div>
 
-
-<!-- Всплывающее окно edit -->
-<!-- На каждого юзера отдельное окно edit -->
+<!-- modal edit -->
 
 <div class="modal fade" th:each="editUser : ${userList}" th:id="${'edit' + editUser.getId()}">
     <div class="modal-dialog" role="document">
@@ -279,9 +254,7 @@
     </div>
 </div>
 
-
-<!-- Всплывающее окно delete -->
-<!-- На каждого юзера отдельное окно delete -->
+<!-- modal delete -->
 
 <div class="modal fade" th:each="deleteUser : ${userList}" th:id="${'delete' + deleteUser.getId()}">
     <div class="modal-dialog" role="document">
@@ -351,29 +324,13 @@
     </div>
 </div>
 </body>
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"-->
-<!--      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">-->
-<!--<head>-->
-<!--    <title>Spring Security Example</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>ADMIN, page!</h1>-->
-
-<!--<form th:action="@{/user-list}" method="post">-->
-<!--    <input type="submit" value="Show all users" />-->
-<!--</form>-->
-
-<!--<form th:action="@{/logout}" method="post">-->
-<!--    <input type="submit" value="Logout" />-->
-<!--</form>-->
-<!--<div>-->
-<!--    <span sec:authentication="name">Username</span>-->
-<!--    <span sec:authentication="principal.authorities">Roles</span>-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</html>

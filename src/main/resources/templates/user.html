@@ -60,7 +60,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="msg : ${user}">
+                    <tr th:each="user : ${user}">
                         <td th:text="${user.getId()}"></td>
                         <td th:text="${user.getName()}"></td>
                         <td th:text="${user.getLastName()}"></td>
@@ -75,41 +75,6 @@
             </div>
         </div>
     </div>
-
-<!--    <div class="col-10">-->
-<!--        <div>-->
-<!--            <h1>User information-page</h1>-->
-<!--            <div class="table-responsive">-->
-<!--                <table class="table table-bordered">-->
-<!--                    <div  class="bg-light">-->
-<!--                        <h4>About user</h4>-->
-<!--                    </div>-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th scope="col">ID</th>-->
-<!--                        <th scope="col">Name</th>-->
-<!--                        <th scope="col">LastName</th>-->
-<!--                        <th scope="col">Username</th>-->
-<!--                        <th scope="col">Role</th>-->
-<!--                    </tr>-->
-
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    <tr>-->
-<!--                        <td th:utext="${user.getId()}">id</td>-->
-<!--                        <td th:utext="${user.getName()}">Name</td>-->
-<!--                        <td th:utext="${user.getLastName()}">Last Name</td>-->
-<!--                        <td th:utext="${user.getUsername()}">Username</td>-->
-<!--                        <td th:each="rol : ${user.getRoles()}"-->
-<!--                            th:text="${rol.getName()}+' '">Role-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
 </div>
 
 
