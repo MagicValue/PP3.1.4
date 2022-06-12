@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found (byId)"));
     }
 
     @Override
@@ -34,13 +34,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User user) {
+    public User saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User update(User user, Long id) {
+        User user1 = userRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("User not found (update)"));
+        user1.setName(user.getName());
+        user1.setLastName(user.getLastName());
+        user1.setUsername(user.getUsername());
+        user1.setPassword(user.getPassword());
+        user1.setEnabled(user.getEnabled());     //?
+        user1.setRoles(user.getRoles());
+        return userRepository.save(user1);
     }
 
     @Override
     public void deleteById(Long id) {
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("User not found (delete)"));
+        userRepository.delete(user);
     }
 }

@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = getUserByUsername(username);
 
         if (user == null) {
-            throw new UsernameNotFoundException("Could not find user");
+            throw new UsernameNotFoundException("Could not found user");
         }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()) {

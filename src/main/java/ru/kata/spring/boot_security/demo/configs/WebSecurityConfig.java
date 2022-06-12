@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .cors().disable()
-                .csrf().disable() //  защита от CSRF-атак
+                .csrf().disable() //  protection from CSRF-attacks
                 .authorizeRequests()
                 .antMatchers("/login", "/").permitAll()
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")

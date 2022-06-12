@@ -10,74 +10,53 @@
     <title>Spring Security Example</title>
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h1">
 
-         <strong><a th:text="${user.getUsername()}"></a></strong>
-        <span class="text-start">with role:
-            <a th:each="rol : ${user.getRoles()}" th:text="${rol.getName()}+' '"></a>
-        </span>
-    </span>
-    <ul class="navbar-nav px-4">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/logout">Logout</a>
-        </li>
-    </ul>
-</nav>
-<div class="row mt-5">
-    <div class="col-2 fixed-left">
-        <div th:fragment="leftmenu">
-            <ul class="nav flex-sm-column">
-                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="nav-link"
-                       th:classappend="${#httpServletRequest.getRequestURI().equals('/admin') ? 'active bg-primary text-white' : ''}"
-                       href="#" th:href="@{/admin}">Admin</a>
-                </li>
-            </ul>
-            <ul class="nav flex-sm-column">
-                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
-                    <a class="nav-link"
-                       th:classappend="${#httpServletRequest.getRequestURI().equals('/user') ? 'active bg-primary text-white' : ''}"
-                       href="#" th:href="@{/user}">User</a>
-                </li>
-            </ul>
-        </div>
+<div class="navbar navbar-expand-md navbar-dark bg-dark align-items-center justify-content-between">
+    <div class="col-11 text-white" id="current_authorised_user-data">
+        <!--js-->
     </div>
-    <div class="col-10 bg-light">
+    <div class="btn btn-link mr-0 col-1 ml-auto">
+        <a class="badge" style="color: grey" href="/logout">Logout</a>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row mt-3">
+        <!--left panel-->
+        <div class=" col-12 ml-2 nav" role="tablist" id="vertical_navigation" aria-orientation="vertical">
+            <div class="col-2 nav flex-column nav-pills">
+                <a class="nav-link active" id="vertical_navigation-user" data-toggle="tab" href="#user_panel" role="tab"
+                   aria-controls="user-panel" aria-selected="true"
+                   sec:authorize="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')">User</a>
+            </div>
 
-        <h1>User information page</h1>
-        <div>
-            <p><strong>About user</strong></p>
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">LastName</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Role</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="user : ${user}">
-                        <td th:text="${user.getId()}"></td>
-                        <td th:text="${user.getName()}"></td>
-                        <td th:text="${user.getLastName()}"></td>
-                        <td th:text="${user.getUsername()}"></td>
-                        <td>
-                            <li th:each="rol : ${user.getRoles()}"
-                                th:text="${rol.getName()}">Role</li>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="col-10">
+                <div class="card">
+                    <h5 class="card-header">About user</h5>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">LastName</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Role</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="current_user_panel-data">
+                                <!--js-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
+<script type="text/javascript" src="user.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
