@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -37,7 +36,6 @@ public class User implements UserDetails {
     private boolean enabled;
 
 
-//    @JsonManagedReference
     @ManyToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinTable(

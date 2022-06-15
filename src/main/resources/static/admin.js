@@ -250,7 +250,7 @@ allUsersTable.addEventListener("click", e => {
                 editUsersPassword.value = user.password;
                 editUsersEnabled.value = user.enabled;
 
-                let editRoles = user.roles.map(role => role.name)   //может тут ошибка .name
+                let editRoles = user.roles.map(role => role.name)
                 editRoles.forEach(
                     role => {
                         if (role === "ROLE_ADMIN") {

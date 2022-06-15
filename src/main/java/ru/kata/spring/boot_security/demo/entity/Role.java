@@ -1,11 +1,9 @@
 package ru.kata.spring.boot_security.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -19,11 +17,6 @@ public class Role implements GrantedAuthority {
 
     @Column(name = "name")
     private String name;
-
-    @JsonBackReference
-    @ManyToMany(mappedBy = "roles")
-    private List<User> users;
-
 
     @Override
     public String getAuthority() {
