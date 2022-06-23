@@ -7,6 +7,7 @@ import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -55,7 +56,11 @@ public class UserServiceImpl implements UserService {
     public User update(User user, Long id) {
         User user1 = userRepository.findById(id).orElseThrow(
                 ()-> new RuntimeException("User not found (update)"));
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        Optional<User> oldUser = userRepository.findById(user.getId());
+        if(oldUser.isEmpty() || !oldUser.get().getPassword().equals(user.getPassword())) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
         return userRepository.save(user);
     }
 
