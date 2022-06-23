@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService {
     public User update(User user, Long id) {
         User user1 = userRepository.findById(id).orElseThrow(
                 ()-> new RuntimeException("User not found (update)"));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
